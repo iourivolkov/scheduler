@@ -6,7 +6,8 @@ import { action } from "@storybook/addon-actions";
 import "index.scss";
 
 import Button from "components/Button";
-import DayListItem from '../src/components/DayListItem'
+import DayListItem from '../src/components/DayListItem';
+import DayList from '../src/components/DayList';
 
 storiesOf("Button", module)
   .addParameters({
