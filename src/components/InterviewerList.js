@@ -1,16 +1,26 @@
 import React from 'react';
 import "components/InterviewerList.scss";
+import InterviewerListItem from './InterviewerListItem';
 
 
-const InterviewerList = function(props) {
+export default function InterviewerList(props) {
 
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
-      <ul className="interviewers__list"></ul>
+      <ul className="interviewers__list">
+      {props.interviewers.map((interviewer) => (
+        <InterviewerListItem
+        key={interviewer.id} 
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        selected={interviewer.id === props.interviewer}
+        setInterviewer={(event) => props.setInterviewer(interviewer.id)}
+        />
+      ))}
+      </ul>
     </section>
-  )
+  );
 }
 
-export default InterviewerList;
-
+// build a component that returns an array of InterviewerListItem components
