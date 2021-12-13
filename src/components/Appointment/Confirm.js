@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'components/Button';
 
+// allows a user to confirm a destructive action
+
 export default function Confirm(props) {
 
   return (

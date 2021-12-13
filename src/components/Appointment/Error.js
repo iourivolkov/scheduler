@@ -1,5 +1,7 @@
 import React from 'react';
 
+// informs the user when an error occurs
+
 export default function Error(props) {
 
 
