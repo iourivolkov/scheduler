@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Error() {
+export default function Error(props) {
 
 
   return (
@@ -13,7 +13,12 @@ export default function Error() {
     className="appointment__error-close"
     src="images/close.png"
     alt="Close"
+    onClick={props.onClose}
   />
 </main>
   )
 }
+
+// err component should accept the following props:
+// message: str --> e.g 'could not delete apt'
+// onClose: f(x) --> called when the user clicks the close button
