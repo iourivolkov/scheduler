@@ -12,11 +12,10 @@ export default function useVisualMode(initial) {
 
   const back = () => {
     setHistory(history => {
-      const newItem = [...history].slice(0,-1);
+      const newItem = history.length > 1 ? [...history].slice(0,-1) : [...history];
       setMode(newItem[newItem.length - 1]);
       return newItem;
     })
-
   }
 return {mode, transition, back}
 }
