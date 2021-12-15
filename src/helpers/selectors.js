@@ -7,9 +7,7 @@ export const getAppointmentsForDay = (state, day) => {
   if(!dayObject) {
     return [];
   }
-}
-
-const appointmentIds = dayObject.appointments;
+  const appointmentIds = dayObject.appointments;
 
 const appointmentsForDay = [];
 
@@ -18,3 +16,8 @@ for(const id in state.appointments) {
     appointmentsForDay.push(state.appointments[id])
   }
 }
+return appointmentsForDay;
+}
+
+
+

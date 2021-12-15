@@ -6,6 +6,7 @@ import InterviewerList from "./InterviewerList";
 import Appointment from "./Appointment";
 import "components/Application.scss";
 import axios from 'axios';
+import { getAppointmentsForDay } from "helpers/selectors";
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -63,17 +64,26 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const dailyAppointments = [];
+  const appointmentsForDay = getAppointmentsForDay(state, state.day);
 
   // function takes in day param and copies state object + updates day
   const setDay = day => setState({...state, day});
-  const setDays = days => setState(prev => ({...prev, days}))
+  // const setDays = days => setState(prev => ({...prev, days}))
   
 
-  useEffect(() => {
-    axios.get("/api/days").then(response => setDays(response.data)
-  )}, [])
+  // useEffect(() => {
+  //   axios.get("/api/days").then(response => setDays(response.data)
+  // )}, [])
 
+  useEffect(() => {
+    Promise.all([
+     axios.get('/api/days'),
+      axios.get('/api/appointments')
+
+  ]).then((all) => {
+    setState(state => ({...state, days: all[0].data, appointments: all[1].data}));
+  });
+}, []);
 
 
   return (
@@ -99,7 +109,7 @@ export default function Application(props) {
 />
       </section>
       <section className="schedule">
-     {dailyAppointments.map(appointment => (
+     {appointmentsForDay.map(appointment => (
        <Appointment
        key={appointment.id}
        {...appointment}
