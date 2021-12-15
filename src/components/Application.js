@@ -64,7 +64,7 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const appointmentsForDay = getAppointmentsForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   // function takes in day param and copies state object + updates day
   const setDay = day => setState({...state, day});
@@ -109,7 +109,7 @@ export default function Application(props) {
 />
       </section>
       <section className="schedule">
-     {appointmentsForDay.map(appointment => (
+     {dailyAppointments.map(appointment => (
        <Appointment
        key={appointment.id}
        {...appointment}
