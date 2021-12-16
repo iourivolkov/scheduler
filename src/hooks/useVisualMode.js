@@ -9,19 +9,19 @@ export default function useVisualMode(initial) {
     setMode(newMode);
     
     if (replace) {
-      setHistory(history => {
-        const newItem = [...history];
+      setHistory(prev => {
+        const newItem = [...prev];
         newItem.splice(-1, 1, newMode);
         return newItem;
       })
     } else {
-      setHistory(history => [...history, newMode]);
+      setHistory(prev => [...prev, newMode]);
     }
   }
 
   const back = () => {
-    setHistory(history => {
-      const newItem = history.length > 1 ? [...history].slice(0,-1) : [...history];
+    setHistory(prev => {
+      const newItem = prev.length > 1 ? [...prev].slice(0,-1) : [...prev];
       setMode(newItem[newItem.length - 1]);
       return newItem;
     })
