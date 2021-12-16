@@ -35,7 +35,17 @@ function bookInterview(id, interview) {
     ...state.appointments[id],
     interview: {...interview}
   };
-  console.log(id, interview);
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+  setState({
+    ...state,
+    appointments
+  })
+  // console.log(id, interview);
 }
 
 // pass this function to the Form component 
