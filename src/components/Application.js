@@ -34,6 +34,15 @@ function bookInterview(id, interview) {
   console.log(id, interview);
 }
 
+function save(name, interviewer) {
+  const interview = {
+    student: name, 
+    interviewer
+  };
+}
+
+
+
 const appointments = getAppointmentsForDay(state, state.day);
 // returns an object 
 const interviewersForDay = getInterviewersForDay(state, state.day);
