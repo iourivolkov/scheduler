@@ -18,11 +18,11 @@ const interviewers = [
 
 
 export default function Application(props) {
-
+// stores local state
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {},
+    appointments: {bookInterview},
     interviewers: {}
   });
 
@@ -30,7 +30,9 @@ export default function Application(props) {
   const setDay = day => setState({...state, day});
   // const setDays = days => setState(prev => ({...prev, days}))
 
- 
+function bookInterview(id, interview) {
+  console.log(id, interview);
+}
 
 const appointments = getAppointmentsForDay(state, state.day);
 // returns an object 
@@ -44,6 +46,7 @@ const schedule = Array.isArray(appointments) && appointments.map((appointment) =
         {...appointment}
         interview={interview}
         interviewers={interviewersForDay}
+        bookInterview={bookInterview}
       />
     )
   })
