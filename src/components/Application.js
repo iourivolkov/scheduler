@@ -31,14 +31,27 @@ export default function Application(props) {
   // const setDays = days => setState(prev => ({...prev, days}))
 
 function bookInterview(id, interview) {
+  const appointment = {
+    ...state.appointments[id],
+    interview: {...interview}
+  };
   console.log(id, interview);
 }
 
-function save(name, interviewer) {
+// pass this function to the Form component 
+// Form should capture th ename and interviewer and pass them to props.onSave as args
+// then create a new interview object to be passed to props.bookInterview
+const save = (name, interviewer) => {
+
+  props.bookInterview(props.id, interview)
+
+ 
   const interview = {
     student: name, 
     interviewer
   };
+
+  // props.bookInterview(props.id, interview);
 }
 
 
