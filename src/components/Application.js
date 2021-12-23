@@ -22,6 +22,28 @@ export default function Application(props) {
     interviewers: {}
   });
 
+
+// function uses appointment id to find the right appointments slot and set it's interview data to
+const cancelInterview = (id, interview) => {
+  const appointment = {
+    ...state.appointments[id],
+    interview: null
+  }
+  
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  }
+
+  const newState = {
+    ...state, 
+    appointments
+  }
+
+  return axios.delete(`/api/appointments/${id}`, {interview})
+    .then(() => setState(newState));
+}
+
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
  
@@ -37,6 +59,7 @@ export default function Application(props) {
         // interview={getInterview(state, appointment.interview)}
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
         
       />
     )
@@ -70,21 +93,6 @@ export default function Application(props) {
     .then(response => setState(state => ({...state, appointments})));
 }
 
-// function uses appointment id to find the right appointments slot and set it's interview data to
-  const cancelInterview = (id, interview) => {
-  const appointment = {
-    ...state.appointments[id],
-    interview: null
-  }
-  
-  const appointments = {
-    ...state.appointments,
-    [id]: appointment
-  }
-
-  return axios.delete(`/api/appointments/${id}`)
-    .then(() => setState(state => ({...state, appointments})));
-}
 
 
   return (
