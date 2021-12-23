@@ -1,24 +1,24 @@
-import React, { Fragment } from 'react';
-import "./styles.scss";
+import React from 'react';
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
 import useVisualMode from 'hooks/useVisualMode';
 import Form from './Form';
 import Status from './Status';
+import Confirm from './Confirm';
 
-
-export default function Appointment(props) {
-  // const bookInterview = props.bookInterview;
-
+import "./styles.scss";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVING = "SAVING";
-const DELETING = "DELETING";
+const SAVE = "SAVE";
+const DELETE = "DELETE";
+const CONFIRM = "CONFIRM";
 
-  
+
+export default function Appointment(props) {
+  const bookInterview = props.bookInterview;
 
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
@@ -27,14 +27,19 @@ const DELETING = "DELETING";
       student: name, 
       interviewer
     };
-    transition(SAVING);
 
-    props.bookInterview(props.id, interview)
-      .then(() => transition(SHOW));
+    transition(SAVE)
+      bookInterview(props.id, interview).then(() => transition(SHOW));
+  }
+
+    function deleteInterview() {
+    transition(DELETE);
+
+    props.cancelInterview(props.id)
+    transition(EMPTY);
   }
 
 
- 
   return (
    <article className="appointment" >
      <Header time={props.time} />
@@ -45,8 +50,10 @@ const DELETING = "DELETING";
 
      {mode === SHOW && (
      <Show
+     id={props.id}
      student={props.interview.student}
      interviewer={props.interview.interviewer} 
+     onDelete={() => transition(CONFIRM)}
      />
      )}
 
@@ -56,10 +63,18 @@ const DELETING = "DELETING";
      onSave={save}
      onCancel={back}
      />
+
+     )}
+     {mode === CONFIRM && (
+      <Confirm 
+      message="Are you sure you want to delete this interview?"
+      onConfirm={deleteInterview}
+      onCancel={back}
+      />
      )}
 
-     {mode === SAVING && (
-    <Status
+     {mode === SAVE && (
+     <Status
      message={"Saving"} />
      )}
    </article>

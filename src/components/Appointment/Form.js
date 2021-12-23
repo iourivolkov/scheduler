@@ -7,7 +7,7 @@ export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
-  const reset = function() {
+  const reset = () => {
      setStudent("")
      setInterviewer(null)
   }
@@ -20,14 +20,14 @@ export default function Form(props) {
   return (
     <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
-    <form onSubmit={event => event.preventDefault()}autoComplete="off">
+    <form onSubmit={event => event.preventDefault()} autoComplete="off">
       <input
         className="appointment__create-input text--semi-bold"
         name="name"
         type="text"
         placeholder="Enter Student Name"
         value={student}
-        onChange={event => setStudent(event.target.value)}
+        onChange={(event) => setStudent(event.target.value)}
       />
     </form>
     <InterviewerList 
