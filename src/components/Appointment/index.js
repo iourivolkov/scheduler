@@ -6,6 +6,7 @@ import useVisualMode from 'hooks/useVisualMode';
 import Form from './Form';
 import Status from './Status';
 import Confirm from './Confirm';
+import Error from './Error';
 
 import "./styles.scss";
 
@@ -15,6 +16,10 @@ const CREATE = "CREATE";
 const SAVE = "SAVE";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
+
 
 
 export default function Appointment(props) {
@@ -30,14 +35,19 @@ export default function Appointment(props) {
     };
 
     transition(SAVE)
-    bookInterview(props.id, interview).then(() => transition(SHOW));
+    bookInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(() => transition(ERROR_SAVE, true));
+    
   }
  
     
     function deleteInterview() {
-      transition(DELETE);
+      transition(DELETE, true);
 
-    cancelInterview(props.id).then(() => transition(EMPTY));
+    cancelInterview(props.id)
+    .then(() => transition(EMPTY))
+    .catch(() => transition(ERROR_DELETE, true));
   }
 
 
@@ -55,11 +65,12 @@ export default function Appointment(props) {
      student={props.interview.student}
      interviewer={props.interview.interviewer} 
      onDelete={() => transition(CONFIRM)}
+     onEdit={() => transition(EDIT)}
      />
      )}
 
      {mode === CREATE && (
-    <Form 
+     <Form 
      interviewers={props.interviewers}
      onSave={save}
      onCancel={back}
@@ -83,6 +94,31 @@ export default function Appointment(props) {
        <Status
        message={"Deleting"} />
      )}
+
+     {mode === EDIT && (
+       <Form
+        name={props.interview.student}
+        interviewers={props.interviewers}
+        interviewer={props.interview.interviewer.id}
+        onSave={save}
+        onCancel={back}
+       />
+     )}
+
+      {mode === ERROR_SAVE && (
+        <Error
+        message="An error occured when saving your appointment."
+        onClose={back} 
+        />
+      )}
+
+      {mode === ERROR_DELETE && (
+        <Error
+        message="An error occured when deleting your appointment."
+        onClose={back}
+        />
+      )}
+
    </article>
   )
 }

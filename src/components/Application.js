@@ -41,7 +41,8 @@ const cancelInterview = (id, interview) => {
   }
 
   return axios.delete(`/api/appointments/${id}`, {interview})
-    .then(() => setState(newState));
+    .then(() => setState(newState))
+    
 }
 
   const appointments = getAppointmentsForDay(state, state.day);
