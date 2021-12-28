@@ -26,7 +26,7 @@ describe("Form", () => {
     const onSave = jest.fn();
   
     /* 2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
-    const { getByText } = render(
+    const { getByText, getByPlaceholderText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
   
