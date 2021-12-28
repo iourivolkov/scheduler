@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
 
+
 export default function Form(props) {
 
   const [student, setStudent] = useState(props.student || "");
@@ -17,9 +18,14 @@ export default function Form(props) {
     props.onCancel();
   }
 
-  const { getByPlaceholderText } = render(
-    <Form interviewers={interviewers} />
-  );
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    props.onSave(name, interviewer);
+  }
 
   return (
     <main className="appointment__card appointment__card--create">
