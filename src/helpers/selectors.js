@@ -42,7 +42,6 @@ export const getInterviewersForDay = (state, day) => {
 
 
 // function will return an object that contains the interview data if it is passed an object that contains an interviewer
-// interview = obj that contains interviewer
 export const getInterview = (state, interview) => {
 
   if(!interview) {

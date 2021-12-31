@@ -19,10 +19,3 @@ export default function InterviewerListItem(props) {
     </li>
   );
 }
-
-
-// a single interviewer is {
-  // id: 1, 
-  // name: 'jane doe',
-  // avatar: img file
-// }

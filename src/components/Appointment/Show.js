@@ -34,8 +34,3 @@ export default function Show(props) {
   )
 }
 
-// show component should accept the following props:
-// student: str --> "Lydia miller-jones"
-// interviewer --> {...} (obj) - use interview obj that already exists
-// onEdit = f(x) --> call when user clicks on the Edit button
-// onDelete = f(x) --> call when user clicks on the Delete button

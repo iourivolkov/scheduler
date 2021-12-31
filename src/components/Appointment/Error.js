@@ -21,6 +21,3 @@ export default function Error(props) {
   )
 }
 
-// err component should accept the following props:
-// message: str --> e.g 'could not delete apt'
-// onClose: f(x) --> called when the user clicks the close button

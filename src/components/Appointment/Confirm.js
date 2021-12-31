@@ -16,7 +16,3 @@ export default function Confirm(props) {
   )
 }
 
-// confirm component should accept the following props;
-// message: str --> e.g "delete the component"
-// onConfirm = f(x) --> call when the user clicks the confirm button
-// onCancel = f(x) --> call whe the user clicks the cancel button 

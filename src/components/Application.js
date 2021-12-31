@@ -12,15 +12,12 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 
 export default function Application(props) {
 
-  // const setDay = (day) => setState({...state, day});
-  // const setDays = (days) => setState(prev => ({...prev, days}));
 
   const {state, setDay, bookInterview, cancelInterview} = useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
- 
-  // Array.isArray(appointments) && 
+
   const schedule = appointments.map((appointment) => {
       const interview = getInterview(state, appointment.interview);
 
@@ -29,7 +26,6 @@ export default function Application(props) {
         key={appointment.id}
         {...appointment}
         interview={interview}
-        // interview={getInterview(state, appointment.interview)}
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}

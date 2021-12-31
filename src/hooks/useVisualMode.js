@@ -29,6 +29,3 @@ export default function useVisualMode(initial) {
 return {mode, transition, back}
 }
 
-// when transition is called - need to add the new mode to our history
-// when back is called, we should set the mode to the prev item in our history array 
-
